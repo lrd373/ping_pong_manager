@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+
+  form(action="/exit-game" method="POST")
+      button Exit game
+
+  if playerOneName && playerTwoName
+    h2 Who would you like to serve first?
+    form(action="/choose-first-serve" method="POST")
+      button(name="firstServe" value="playerOne") #{playerOneName} 
+      button(name="firstServe" value="playerTwo") #{playerTwoName}

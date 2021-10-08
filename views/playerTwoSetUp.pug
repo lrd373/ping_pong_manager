@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  form(action="/exit-game" method="POST")
+    button Exit game
+
+  if error 
+    h2= error 
+
+  if choosePreviousName 
+    form(action="/player-two-name" method="POST")
+      for player in registeredPlayers 
+        button(name="registeredPlayer" value=player) #{player}
+    
+  if registeredPlayers && registeredPlayers.length > 0 && !addNewName && !choosePreviousName
+    h2 Player 2, would you like to choose a previously registered name or register a new name?
+    form(action="/player-two-name" method="POST")
+      div.checkbox-group(required)
+        input(type="checkbox" name="add_new_name")
+        label(for="add_new_name") Register a new player
+        input(type="checkbox" name="choose_previous_name")
+        label(for="choose_previous_name") Choose a previously registered name
+      button Submit
+
+  else if !choosePreviousName
+    h2 Player 2, please enter your player name:
+    form(action="/player-two-name" method="POST")
+      label(for="add_player_two_name") Your name:
+      input(type="text" required name="add_player_two_name")
+      button Submit

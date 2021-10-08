@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  form(action="/exit-game" method="POST")
+    button Exit game
+
+  h2 Serve Counter: #{serveCounter}
+  
+  .playerScores 
+    .playerOneScore.playerScore 
+      h3=scorePlayerOne 
+      h5=playerOneName 
+    .playerTwoScore.playerScore  
+      h3=scorePlayerTwo 
+      h5=playerTwoName 
+
+  h2.currentServe Serve  
+    if currentServe === "playerOne"
+      | Player One: #{playerOneName} 
+    else 
+      | Player Two: #{playerTwoName} 
+
+  h2 Who scored a point?
+  form(action="/game-board" method="POST") 
+    button(name="who_scored" value="playerOne") Player One: #{playerOneName}
+    button(name="who_scored" value="playerTwo") Player Two: #{playerTwoName}

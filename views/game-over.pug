@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  h1 The winner was... 
+    if thisMatchWinner === "playerOne"
+      | Player One, #{playerOneName}
+    else 
+      | Player Two, #{playerTwoName}
+    
+  p with a score of 
+    if thisMatchWinner === "playerOne"
+      | #{scorePlayerOne} to #{scorePlayerTwo}
+    else 
+      | #{scorePlayerTwo} to #{scorePlayerOne}
+
+  form(action="/game-over" method="POST")
+    button(name="start_new_match") Start new match!
+
+  .leaderboard 
+    h3.leaderboardHeader Leaderboard
+    for player in leaderboard
+      h4= player.playerName
+      p Wins: #{player.totalWins}
+      p Average winning score difference: #{player.avgDiff}

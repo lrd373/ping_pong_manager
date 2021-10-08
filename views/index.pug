@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+  form(action="/" method="POST")
+    button Start game
+  
+  if leaderboard && leaderboard.length > 0
+    .leaderboard 
+    h3.leaderboardHeader Leaderboard
+    for player in leaderboard
+      h4= player.playerName
+      p Wins: #{player.totalWins}
+      p Average winning score difference: #{player.avgDiff}
